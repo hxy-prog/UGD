@@ -1,0 +1,69 @@
+# dataset settings
+dataset_type = 'CIMLDataset'
+data_root = '/home/hexingyang/MMFusion-IML-main'
+img_norm_cfg = dict(
+    mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
+crop_size = (512, 512)
+train_pipeline = [
+    dict(type='LoadPairImageFromFile'),
+    dict(type='LoadAnnotations', reduce_zero_label=False),
+    
+    
+    dict(type='PairSizeResize', size=(512,512)),
+    # dict(type='PairPad', size=crop_size, pad_val=0, seg_pad_val=0),
+    # dict(type='PairRandomCrop', crop_size=crop_size),
+    ###jpeg
+    dict(type='PairJPEGCompression', quality_lower=30, quality_upper=100, p=0.5),
+    dict(type='PairRandomFlip', prob=0.5),
+    dict(type='PairNormalize', **img_norm_cfg),
+    
+    
+    
+    dict(type='PairDefaultFormatBundle'),
+    dict(type='Collect', keys=['img','realimg','gt_semantic_seg']),
+]
+test_pipeline = [
+    dict(type='LoadPairImageFromFile'),
+    dict(
+        type='MultiScaleFlipAug',
+        img_scale=(2048, 512),
+        # img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
+        flip=False,
+        transforms=[
+            # dict(type='Resize', keep_ratio=True),
+            # dict(type='RandomFlip'),
+            dict(type='PairSizeResize', size=(512,512)),
+            # dict(type='PairJPEGCompression', quality_lower=50, quality_upper=51, p=1),
+            # dict(type='PairGuassblur',kernel_size=13),
+            # dict(type='PairGuassnoise',var=13),
+            dict(type='Pairgamma_correction',gamma=0.7),
+            dict(type='PairNormalize', **img_norm_cfg),
+            dict(type='ImageToTensor', keys=['img','realimg']),
+            dict(type='Collect', keys=['img','realimg']),
+        ])
+]
+val_dataroot='/home/hexingyang/DDP/segmentation/data/CIML'
+test_dataroot='/home/disk/hexingyang/imltest/Casiav1'
+data = dict(
+    samples_per_gpu=4,
+    workers_per_gpu=4,
+    train=dict(
+        type=dataset_type,
+        data_root=data_root,
+        img_dir='data',
+        ann_dir='data',
+        pipeline=train_pipeline),
+    val=dict(
+        type=dataset_type,
+        data_root=val_dataroot,
+        img_dir='',
+        ann_dir='',
+        pipeline=test_pipeline),
+    test=dict(
+        type=dataset_type,
+        data_root=test_dataroot,
+        img_dir='',
+        img_suffix='jpg',
+        ann_dir='',
+        seg_map_suffix='png',
+        pipeline=test_pipeline))

@@ -1,0 +1,15 @@
+# ======================
+# 忽略模型权重和大文件
+# ======================
+
+# BoT-SORT 相关模型
+MFS/BoT-SORT-main/yolov8l.pt
+MFS/BoT-SORT-main/yolov8x.pt
+MFS/BoT-SORT-main/pretrained/
+MFS/BoT-SORT-main/yolov7-d6.pt
+MFS/BoT-SORT-main/yolov8/
+
+# UGD 相关大文件
+MFS/UGD/imd.tar
+MFS/UGD/ckpt/
+MFS/UGD/finalresult/

@@ -1,0 +1,1 @@
+['python', 'image_demo_c.py', 'C:/Users/dell/Downloads/65_0.jpg', 'C:/Users/dell/Downloads/65_13.jpg', 'configs\\iml\\ddp_swin_l_2x8_512x512_epochbase_iml_cons_shuffle_resize_two.py', 'finalresult\\ciml\\epoch_50.pth']

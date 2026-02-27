@@ -1,0 +1,25 @@
+IML 推理失败:
+C:\Users\dell\miniconda3\envs\sys\lib\site-packages\timm\models\layers\__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+Traceback (most recent call last):
+  File "C:\Users\dell\Desktop\��ҵ���\syst\labelimg-master\DDP\image_demo.py", line 4, in <module>
+    from mmseg.apis import inference_segmentor, init_segmentor, show_result_pyplot
+  File "C:\Users\dell\Desktop\��ҵ���\syst\labelimg-master\DDP\mmseg\apis\__init__.py", line 2, in <module>
+    from .inference import inference_segmentor, init_segmentor, show_result_pyplot,inference_segmentor_c
+  File "C:\Users\dell\Desktop\��ҵ���\syst\labelimg-master\DDP\mmseg\apis\inference.py", line 10, in <module>
+    from mmseg.models import build_segmentor
+  File "C:\Users\dell\Desktop\��ҵ���\syst\labelimg-master\DDP\mmseg\models\__init__.py", line 8, in <module>
+    from .segmentors import *  # noqa: F401,F403
+  File "C:\Users\dell\Desktop\��ҵ���\syst\labelimg-master\DDP\mmseg\models\segmentors\__init__.py", line 11, in <module>
+    from .vaeddp import VAEDDP
+  File "C:\Users\dell\Desktop\��ҵ���\syst\labelimg-master\DDP\mmseg\models\segmentors\vaeddp.py", line 99, in <module>
+    decoder.init_weights()
+  File "C:\Users\dell\Desktop\��ҵ���\syst\labelimg-master\DDP\mmseg\models\segmentors\vaeddp.py", line 83, in init_weights
+    ckpt=torch.load('mmseg/models/vae/vae_parameters.pth',map_location='cpu')
+  File "C:\Users\dell\miniconda3\envs\sys\lib\site-packages\torch\serialization.py", line 699, in load
+    with _open_file_like(f, 'rb') as opened_file:
+  File "C:\Users\dell\miniconda3\envs\sys\lib\site-packages\torch\serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "C:\Users\dell\miniconda3\envs\sys\lib\site-packages\torch\serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: 'mmseg/models/vae/vae_parameters.pth'
